@@ -31,7 +31,7 @@ The result is a PDS that runs at the edge with no servers to manage, automatic s
 npm create pds
 ```
 
-This scaffolds a new project, installs dependencies, and runs the setup wizard. See the [PDS package documentation](./packages/pds/) for detailed setup and configuration.
+This scaffolds a new project, installs dependencies, and runs the setup wizard. See the [PDS package documentation](./) for detailed setup and configuration.
 
 ## Before You Get Started
 
@@ -48,11 +48,11 @@ Once your domain is active in Cloudflare, you can proceed with the setup wizard.
 
 ## Packages
 
-| Package                                                   | Description                                                                            |
-| --------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [`@getcirrus/pds`](./packages/pds/)                       | The PDS implementation – handles repository operations, federation, OAuth, and the CLI |
-| [`@getcirrus/oauth-provider`](./packages/oauth-provider/) | OAuth 2.1 provider for "Login with Bluesky"                                            |
-| [`create-pds`](./packages/create-pds/)                    | Scaffolding CLI to create new PDS projects                                             |
+| Package                                              | Description                                                                            |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| [`@getcirrus/pds`](./)                               | The PDS implementation – handles repository operations, federation, OAuth, and the CLI |
+| [`@getcirrus/oauth-provider`](./src/oauth-provider/) | OAuth 2.1 provider for "Login with Bluesky"                                            |
+| [`create-pds`](./src/create-pds.ts)                  | Scaffolding CLI to create new PDS projects                                             |
 
 ## Status
 
@@ -67,7 +67,7 @@ Core features currently working:
 - Account migration to another PDS (stateless token generation)
 - Passkey authentication for passwordless login
 
-See the [PDS documentation](./packages/pds/) for current limitations and roadmap.
+See the [PDS documentation](./) for current limitations and roadmap.
 
 ## Key Safety
 

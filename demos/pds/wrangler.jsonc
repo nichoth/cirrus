@@ -1,6 +1,6 @@
 {
 	// Demo PDS Deployment
-	// Run `pnpm pds init` to configure, or `pnpm pds init --production` to deploy secrets
+	// Run `npm run pds init` to configure, or `npm run pds init --production` to deploy secrets
 	"name": "atproto-pds",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-12-02",

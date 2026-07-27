@@ -42,7 +42,7 @@ If you are creating a new `did:web` account, the wizard prints the signing key o
 For a non-interactive scaffold (defaults for everything), use the `--yes` flag:
 
 ```bash
-npm create pds@latest -- --yes --pm pnpm
+npm create pds@latest -- --yes --pm npm
 ```
 
 See the [create-pds CLI reference](/reference/create-pds-cli/) for every flag.
@@ -51,7 +51,7 @@ See the [create-pds CLI reference](/reference/create-pds-cli/) for every flag.
 If the scaffolder was run with `--skip-init` (or the wizard was skipped for any other reason), run the wizard manually from inside the project directory:
 
 ```bash
-pnpm pds init
+npm run pds init
 ```
 
 A fresh `npm create pds` run does this automatically — `pds init` does not need to be run again.
@@ -62,7 +62,7 @@ A fresh `npm create pds` run does this automatically — `pds init` does not nee
 From the project directory:
 
 ```bash
-pnpm run deploy
+npm run deploy
 ```
 
 This runs `wrangler deploy`, which uploads the Worker, creates the Durable Object namespace, and provisions the R2 bucket. The first deploy takes a minute or two.
@@ -70,7 +70,7 @@ This runs `wrangler deploy`, which uploads the Worker, creates the Durable Objec
 For a production deploy, push the secrets to Cloudflare:
 
 ```bash
-pnpm pds init --production
+npm run pds init -- --production
 ```
 
 The `--production` flag writes the secrets stored in `.dev.vars` to Cloudflare as Worker secrets instead of keeping them local.
@@ -84,7 +84,7 @@ Open `https://pds.example.com/xrpc/com.atproto.server.describeServer`. The respo
 For an interactive health check, run:
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 This checks connectivity, resolves the handle, verifies the repository is initialised, and reports the blob count.

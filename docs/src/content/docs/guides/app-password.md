@@ -14,7 +14,7 @@ App passwords avoid both. Each one is named (`my-feed-builder`, `mobile-poster-b
 ## Create one
 
 ```bash
-pnpm pds app-password create
+npm run pds app-password create
 ```
 
 The CLI prompts for a name, then prints the password once in the format `xxxx-xxxx-xxxx-xxxx`. **Save it then; it is not shown again.**
@@ -24,7 +24,7 @@ Give the password (along with the account handle) to the third-party client. The
 ## List existing app passwords
 
 ```bash
-pnpm pds app-password list
+npm run pds app-password list
 ```
 
 This shows the names of all created app passwords. It does not show the passwords themselves — those are only printed at creation time.
@@ -32,7 +32,7 @@ This shows the names of all created app passwords. It does not show the password
 ## Revoke an app password
 
 ```bash
-pnpm pds app-password revoke
+npm run pds app-password revoke
 ```
 
 The command prompts to select a password from the list and confirms before revoking. Pass `-y` to skip the confirmation.

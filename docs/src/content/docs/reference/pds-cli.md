@@ -6,7 +6,7 @@ description: Every subcommand the pds CLI exposes, with flags and behaviour.
 The `pds` command is the operator interface for a Cirrus deployment. It is installed automatically into the scaffolded project — invoke it through the project's package manager:
 
 ```bash
-pnpm pds <command>
+npm run pds <command>
 ```
 
 Every command supports `--dev` to target a local dev server (`http://localhost:5173`) instead of production. Set the `PORT` env var to override the dev port.
@@ -16,7 +16,7 @@ Every command supports `--dev` to target a local dev server (`http://localhost:5
 Run the interactive setup wizard.
 
 ```bash
-pnpm pds init [--production]
+npm run pds init [--production]
 ```
 
 **What it does:**
@@ -37,7 +37,7 @@ Re-running `init` against an existing deployment uses the existing key from `.de
 Transfer an account from another PDS to the current Cirrus deployment.
 
 ```bash
-pnpm pds migrate [--dev] [--clean]
+npm run pds migrate [--dev] [--clean]
 ```
 
 **Prompts for:** source PDS hostname, current handle, current password.
@@ -58,7 +58,7 @@ Full walkthrough: [Migrate from Bluesky](/guides/migrate-from-bluesky/).
 Submit the PLC operation that rotates the DID to point at Cirrus.
 
 ```bash
-pnpm pds identity [--dev] [--token <token>]
+npm run pds identity [--dev] [--token <token>]
 ```
 
 Applies only to `did:plc` accounts. `did:web` identities do not use PLC operations, so this command exits early on a `did:web` DID.
@@ -77,7 +77,7 @@ Used during migration after the repository transfer completes.
 Activate the account on the current PDS.
 
 ```bash
-pnpm pds activate [--dev] [-y|--yes]
+npm run pds activate [--dev] [-y|--yes]
 ```
 
 Sets the account status to active. The PDS accepts write operations and serves the firehose.
@@ -91,7 +91,7 @@ Used after migration to mark the target PDS authoritative.
 Deactivate the account on the current PDS.
 
 ```bash
-pnpm pds deactivate [--dev] [-y|--yes]
+npm run pds deactivate [--dev] [-y|--yes]
 ```
 
 Sets the account status to inactive. Write operations are rejected. The PDS still responds to identity probes and `describeServer`.
@@ -105,7 +105,7 @@ Used after migrating away to mark the source as no longer authoritative.
 Generate a short-lived token authorising migration to another PDS.
 
 ```bash
-pnpm pds migrate-token [--dev]
+npm run pds migrate-token [--dev]
 ```
 
 Prints a token valid for 15 minutes. The token is consumed by the target PDS's import flow.
@@ -117,7 +117,7 @@ Full walkthrough: [Migrate to another PDS](/guides/migrate-to-another-pds/).
 Emit an identity event to the firehose to prompt relays to refresh.
 
 ```bash
-pnpm pds emit-identity [--dev]
+npm run pds emit-identity [--dev]
 ```
 
 Used after a handle change or PLC rotation to accelerate the network's view of the change.
@@ -127,7 +127,7 @@ Used after a handle change or PLC rotation to accelerate the network's view of t
 Health check.
 
 ```bash
-pnpm pds status [--dev]
+npm run pds status [--dev]
 ```
 
 Reports:
@@ -146,7 +146,7 @@ Each check prints a green ✓ or a red ✗. Failed checks include a hint.
 Open a live terminal dashboard.
 
 ```bash
-pnpm pds dashboard [--dev]
+npm run pds dashboard [--dev]
 ```
 
 Shows:
@@ -168,7 +168,7 @@ Manage WebAuthn passkeys.
 ### passkey add
 
 ```bash
-pnpm pds passkey add [--dev] [-n|--name <name>]
+npm run pds passkey add [--dev] [-n|--name <name>]
 ```
 
 Starts a registration flow. Prints a one-time URL (and QR code) valid for ten minutes. Open the URL on a passkey-capable device and complete registration. `-n`/`--name` labels the passkey (for example `iPhone`, `MacBook`); without it, the command prompts for a name.
@@ -176,7 +176,7 @@ Starts a registration flow. Prints a one-time URL (and QR code) valid for ten mi
 ### passkey list
 
 ```bash
-pnpm pds passkey list [--dev]
+npm run pds passkey list [--dev]
 ```
 
 Lists all registered passkeys with their names and last-used timestamps.
@@ -184,7 +184,7 @@ Lists all registered passkeys with their names and last-used timestamps.
 ### passkey remove
 
 ```bash
-pnpm pds passkey remove [--dev] [--id <credentialId>] [-y|--yes]
+npm run pds passkey remove [--dev] [--id <credentialId>] [-y|--yes]
 ```
 
 Prompts to select a passkey from the list and removes it. `--id` skips the selection prompt and targets a specific credential. `-y`/`--yes` skips the confirmation prompt.
@@ -198,7 +198,7 @@ Manage app passwords for third-party clients.
 ### app-password create
 
 ```bash
-pnpm pds app-password create [--dev] [-n|--name <name>]
+npm run pds app-password create [--dev] [-n|--name <name>]
 ```
 
 Prompts for a name, then prints a freshly generated app password (format `xxxx-xxxx-xxxx-xxxx`). The password is shown once. `-n`/`--name` skips the name prompt.
@@ -206,7 +206,7 @@ Prompts for a name, then prints a freshly generated app password (format `xxxx-x
 ### app-password list
 
 ```bash
-pnpm pds app-password list [--dev]
+npm run pds app-password list [--dev]
 ```
 
 Lists the names of all created app passwords. Does not show the passwords themselves.
@@ -214,7 +214,7 @@ Lists the names of all created app passwords. Does not show the passwords themse
 ### app-password revoke
 
 ```bash
-pnpm pds app-password revoke [--dev] [-n|--name <name>] [-y|--yes]
+npm run pds app-password revoke [--dev] [-n|--name <name>] [-y|--yes]
 ```
 
 Prompts to select an app password to revoke. `-n`/`--name` targets a specific app password by name. `-y`/`--yes` skips the confirmation prompt.
@@ -228,7 +228,7 @@ Generate and store credentials. Each `secret` subcommand writes the value throug
 ### secret key
 
 ```bash
-pnpm pds secret key [--local]
+npm run pds secret key [--local]
 ```
 
 Generates a fresh secp256k1 signing keypair. Writes `SIGNING_KEY` (private) and `SIGNING_KEY_PUBLIC` (public, multibase-encoded).
@@ -238,7 +238,7 @@ Rotating the signing key has follow-up steps. See [Manage secrets and rotate key
 ### secret jwt
 
 ```bash
-pnpm pds secret jwt [--local]
+npm run pds secret jwt [--local]
 ```
 
 Generates a fresh random `JWT_SECRET`. Rotating invalidates all existing session JWTs.
@@ -246,7 +246,7 @@ Generates a fresh random `JWT_SECRET`. Rotating invalidates all existing session
 ### secret password
 
 ```bash
-pnpm pds secret password [--local]
+npm run pds secret password [--local]
 ```
 
 Prompts for a new account password, bcrypts it, and writes `PASSWORD_HASH`.

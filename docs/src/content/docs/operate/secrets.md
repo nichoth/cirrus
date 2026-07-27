@@ -23,7 +23,7 @@ In local development, secrets are in `.dev.vars` (gitignored).
 In production, secrets are Worker secrets stored on Cloudflare. They are write-only: once set, the dashboard and API do not return their value. Push secrets from `.dev.vars` to production with:
 
 ```bash
-pnpm pds init --production
+npm run pds init -- --production
 ```
 
 This runs the wizard in production mode: it reads each secret from `.dev.vars` and uploads it as a Worker secret.
@@ -31,7 +31,7 @@ This runs the wizard in production mode: it reads each secret from `.dev.vars` a
 For a single secret, use `wrangler` directly:
 
 ```bash
-pnpm wrangler secret put SIGNING_KEY
+npx wrangler secret put SIGNING_KEY
 ```
 
 The command prompts for the value (it is not visible in shell history).
@@ -41,7 +41,7 @@ The command prompts for the value (it is not visible in shell history).
 Rotating `JWT_SECRET` invalidates all existing session JWTs. Users must sign in again.
 
 ```bash
-pnpm pds secret jwt
+npm run pds secret jwt
 ```
 
 The `pds secret jwt` command generates a fresh secret and uploads it to Cloudflare as the `JWT_SECRET` Worker secret via `wrangler secret put`.
@@ -49,7 +49,7 @@ The `pds secret jwt` command generates a fresh secret and uploads it to Cloudfla
 To write the new secret to `.dev.vars` instead of uploading it, pass `--local`:
 
 ```bash
-pnpm pds secret jwt --local
+npm run pds secret jwt -- --local
 ```
 
 After rotation, the next Bluesky app sign-in re-issues a session signed with the new secret. Existing sessions silently stop working.
@@ -59,7 +59,7 @@ After rotation, the next Bluesky app sign-in re-issues a session signed with the
 Rotating the password invalidates the previous password. App passwords are unaffected (they are stored independently).
 
 ```bash
-pnpm pds secret password
+npm run pds secret password
 ```
 
 The `pds secret password` command prompts for the new password (or generates one), bcrypts it, and uploads the hash to Cloudflare as the `PASSWORD_HASH` Worker secret.
@@ -67,7 +67,7 @@ The `pds secret password` command prompts for the new password (or generates one
 Pass `--local` to write the hash to `.dev.vars` instead:
 
 ```bash
-pnpm pds secret password --local
+npm run pds secret password -- --local
 ```
 
 After rotation, sign in with the new password.
@@ -80,7 +80,7 @@ After rotation, sign in with the new password.
 # Generate a fresh token (any method works; e.g.):
 openssl rand -hex 32
 
-pnpm wrangler secret put AUTH_TOKEN
+npx wrangler secret put AUTH_TOKEN
 ```
 
 Update any scripts that use the previous token.
@@ -102,13 +102,13 @@ The PLC operation handles the rotation:
 
 1. Generate a new signing key. This uploads `SIGNING_KEY` and updates `SIGNING_KEY_PUBLIC` in `wrangler.jsonc`:
    ```bash
-   pnpm pds secret key
+   npm run pds secret key
    ```
 2. Sign a PLC operation with the recovery key that swaps the active signing key to the new one. The Bluesky app's settings or the [PLC tooling](https://github.com/did-method-plc/did-method-plc) can do this. The new public key is now in `wrangler.jsonc`; use it in the operation.
 3. Submit the operation to `plc.directory`.
 4. Redeploy so the Worker picks up the new `SIGNING_KEY_PUBLIC` value:
    ```bash
-   pnpm run deploy
+   npm run deploy
    ```
 
 The DID is preserved. Existing signed commits remain verifiable against the previous public key, which is still recorded in the DID document's history.
@@ -119,11 +119,11 @@ For `did:web`, the DID document is served by Cirrus itself. Rotation is simpler 
 
 1. Generate a new signing key. This uploads `SIGNING_KEY` and updates `SIGNING_KEY_PUBLIC` in `wrangler.jsonc`:
    ```bash
-   pnpm pds secret key
+   npm run pds secret key
    ```
 2. Redeploy:
    ```bash
-   pnpm run deploy
+   npm run deploy
    ```
 
 The served DID document now lists the new public key. Old signed commits do not verify against the new key. Followers and content survive — relays accept new commits because the DID document advertises the new key — but the cryptographic chain is reset.

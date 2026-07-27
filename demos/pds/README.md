@@ -11,7 +11,7 @@ This is an example deployment of `@getcirrus/pds` - a single-user AT Protocol Pe
 ### 1. Install dependencies
 
 ```bash
-pnpm install
+npm install
 ```
 
 ### 2. Configure environment
@@ -19,7 +19,7 @@ pnpm install
 Use the PDS CLI to generate keys and configure your local dev environment:
 
 ```bash
-pnpm pds init
+npm run pds init
 ```
 
 This will prompt for your hostname, handle, and password, then write configuration to `.dev.vars`.
@@ -27,7 +27,7 @@ This will prompt for your hostname, handle, and password, then write configurati
 ### 3. Run locally
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 This starts a local development server using Miniflare with your `.dev.vars` configuration.
@@ -37,7 +37,7 @@ This starts a local development server using Miniflare with your `.dev.vars` con
 Use the PDS CLI to configure for production:
 
 ```bash
-pnpm pds init
+npm run pds init
 ```
 
 This sets vars in `wrangler.jsonc` and secrets via `wrangler secret put`.
@@ -45,20 +45,20 @@ This sets vars in `wrangler.jsonc` and secrets via `wrangler secret put`.
 Or configure secrets individually:
 
 ```bash
-pnpm pds secret key      # Generate signing keypair
-pnpm pds secret jwt      # Generate JWT secret
-pnpm pds secret password # Set login password
+npm run pds secret key      # Generate signing keypair
+npm run pds secret jwt      # Generate JWT secret
+npm run pds secret password # Set login password
 ```
 
 Then deploy:
 
 ```bash
-pnpm run deploy
+npm run deploy
 ```
 
 ## Configuration
 
-Configuration is via environment variables: vars in the `wrangler.jsonc` and secrets. Use `pnpm pds init` to configure interactively.
+Configuration is via environment variables: vars in the `wrangler.jsonc` and secrets. Use `npm run pds init` to configure interactively.
 
 **Vars (in wrangler.jsonc):**
 

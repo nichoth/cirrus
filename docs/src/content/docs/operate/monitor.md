@@ -10,7 +10,7 @@ Cirrus provides three monitoring surfaces: the `pds status` health check, the `p
 The fastest health check. Run from the project directory:
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 The output covers:
@@ -29,7 +29,7 @@ A failing check prints the cause and a hint. Use `pds status --dev` against a lo
 For continuous monitoring during a deploy, migration, or debugging session:
 
 ```bash
-pnpm pds dashboard
+npm run pds dashboard
 ```
 
 This opens a terminal UI with two columns and two panels below them:

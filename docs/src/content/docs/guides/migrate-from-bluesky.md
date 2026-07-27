@@ -33,7 +33,7 @@ Once step 4 lands, the network's view of the account points at Cirrus.
 From the Cirrus project directory:
 
 ```bash
-pnpm pds migrate
+npm run pds migrate
 ```
 
 The handle and DID come from `wrangler.jsonc` (set by `pds init` when migration was chosen). The CLI resolves the source PDS automatically from the DID document, so the only prompt is:
@@ -49,7 +49,7 @@ If the process is interrupted, run `pds migrate` again. It picks up from the las
 After the repository and blobs are transferred, the CLI prompts for the PLC operation:
 
 ```bash
-pnpm pds identity
+npm run pds identity
 ```
 
 Bluesky issues `did:plc`, so every migrating account uses PLC. `pds identity` only handles `did:plc` accounts.
@@ -69,7 +69,7 @@ Once the PLC operation lands, the DID document points at the Cirrus PDS and the 
 Activate the account on Cirrus:
 
 ```bash
-pnpm pds activate
+npm run pds activate
 ```
 
 Then run `pds status` to confirm:
@@ -88,7 +88,7 @@ The source PDS still has the account state, but it is no longer the authoritativ
 Emit an identity event to notify relays of the change:
 
 ```bash
-pnpm pds emit-identity
+npm run pds emit-identity
 ```
 
 This is optional in most cases (relays pick up the PLC change naturally) but accelerates the firehose hand-off.

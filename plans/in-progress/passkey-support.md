@@ -32,7 +32,7 @@ The browser-side WebAuthn API is native - no client library needed.
 
 ### Phase 1: Storage Layer
 
-**File:** `packages/pds/src/oauth-storage.ts`
+**File:** `src/oauth-storage.ts`
 
 Add passkey table and methods:
 
@@ -57,7 +57,7 @@ RPC methods to add to `AccountDurableObject`:
 
 ### Phase 2: Registration Token System
 
-**File:** `packages/pds/src/passkey.ts` (new)
+**File:** `src/passkey.ts` (new)
 
 - Generate short-lived registration tokens (10 min expiry)
 - Store in Durable Object with expiry
@@ -65,7 +65,7 @@ RPC methods to add to `AccountDurableObject`:
 
 ### Phase 3: Web UI for Registration
 
-**File:** `packages/pds/src/passkey-ui.ts` (new)
+**File:** `src/passkey-ui.ts` (new)
 
 Minimal page matching existing OAuth consent UI style:
 
@@ -83,7 +83,7 @@ The page:
 
 ### Phase 4: Worker Routes
 
-**File:** `packages/pds/src/index.ts`
+**File:** `src/index.ts`
 
 New routes:
 
@@ -96,7 +96,7 @@ Both routes require valid registration token in query string.
 
 ### Phase 5: CLI Commands
 
-**File:** `packages/pds/src/cli/commands/passkey/index.ts` (new)
+**File:** `src/cli/commands/passkey/index.ts` (new)
 
 ```
 pds passkey add [--name <name>]
@@ -123,20 +123,20 @@ Update OAuth consent UI to offer passkey login when available:
 
 ### New Files
 
-- `packages/pds/src/passkey.ts` - Registration token logic, WebAuthn verification
-- `packages/pds/src/passkey-ui.ts` - HTML rendering for registration page
-- `packages/pds/src/cli/commands/passkey/index.ts` - CLI command group
-- `packages/pds/src/cli/commands/passkey/add.ts`
-- `packages/pds/src/cli/commands/passkey/list.ts`
-- `packages/pds/src/cli/commands/passkey/remove.ts`
+- `src/passkey.ts` - Registration token logic, WebAuthn verification
+- `src/passkey-ui.ts` - HTML rendering for registration page
+- `src/cli/commands/passkey/index.ts` - CLI command group
+- `src/cli/commands/passkey/add.ts`
+- `src/cli/commands/passkey/list.ts`
+- `src/cli/commands/passkey/remove.ts`
 
 ### Modified Files
 
-- `packages/pds/src/index.ts` - Add passkey routes
-- `packages/pds/src/account-do.ts` - Add passkey storage RPC methods
-- `packages/pds/src/storage.ts` - Add passkey table schema
-- `packages/pds/src/cli/index.ts` - Register passkey subcommand
-- `packages/pds/package.json` - Add @simplewebauthn/server dependency
+- `src/index.ts` - Add passkey routes
+- `src/account-do.ts` - Add passkey storage RPC methods
+- `src/storage.ts` - Add passkey table schema
+- `src/cli/index.ts` - Register passkey subcommand
+- `package.json` - Add @simplewebauthn/server dependency
 
 ## Security Considerations
 

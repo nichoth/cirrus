@@ -21,7 +21,7 @@ The DID and the followers transfer. The account experience on Bluesky does not c
 Cirrus issues a stateless migration token signed with the account's signing key. The target PDS or tool may mention this as being emailed, but Cirrus uses the CLI not email. The token authorises the target PDS to export the repository and rotate the DID.
 
 ```bash
-pnpm pds migrate-token
+npm run pds migrate-token
 ```
 
 The CLI prints a token that is valid for 15 minutes. Pass it to the target PDS's migration tool.
@@ -55,7 +55,7 @@ The PLC rotation is performed by the target PDS, not by Cirrus. The Cirrus signi
 Once the PLC operation lands, the network points at the new PDS. Deactivate the account on Cirrus to stop serving stale data:
 
 ```bash
-pnpm pds deactivate
+npm run pds deactivate
 ```
 
 This sets the account status to inactive. The Worker still responds to `describeServer` and identity probes, but write operations are rejected.

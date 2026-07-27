@@ -18,7 +18,7 @@ Passkeys do not replace the account password for the Bluesky app's `createSessio
 From the Cirrus project directory:
 
 ```bash
-pnpm pds passkey add
+npm run pds passkey add
 ```
 
 The CLI prints a one-time URL (and a QR code). The URL is valid for ten minutes.
@@ -46,13 +46,13 @@ The full flow is the same as any OAuth 2.1 + DPoP login. The passkey just replac
 List all registered passkeys with their last-used timestamps:
 
 ```bash
-pnpm pds passkey list
+npm run pds passkey list
 ```
 
 Remove a passkey (for example, after losing the device):
 
 ```bash
-pnpm pds passkey remove
+npm run pds passkey remove
 ```
 
 The command prompts to select a passkey from the list.
@@ -64,7 +64,7 @@ If every passkey is unusable (device lost, all credentials wiped), the account p
 If the account password is also unknown, set a new one:
 
 ```bash
-pnpm pds secret password
+npm run pds secret password
 ```
 
 This prompts for a new password, bcrypts it, and pushes the hash to Cloudflare as the `PASSWORD_HASH` secret via `wrangler secret put`. The Worker picks up the new secret on its next invocation. From there, sign in normally and re-register passkeys.

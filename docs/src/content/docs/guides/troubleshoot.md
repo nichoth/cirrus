@@ -42,7 +42,7 @@ For background, see [Choose a handle](/guides/choose-a-handle/).
    ```
    SIGNING_KEY=<the backed-up key>
    ```
-3. Re-run `pnpm pds init`. The wizard detects the key, verifies it matches the DID document, and continues.
+3. Re-run `npm run pds init`. The wizard detects the key, verifies it matches the DID document, and continues.
 
 If the key is genuinely lost, see [Back up your signing key](/guides/back-up-signing-key/) for recovery options by DID method.
 
@@ -59,7 +59,7 @@ curl https://pds.example.com/xrpc/com.atproto.server.describeServer
 If the PDS does not respond, the deployment is down. Check the Cloudflare dashboard for Worker errors.
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 If the handle does not resolve, fix that first (see above).
@@ -67,7 +67,7 @@ If the handle does not resolve, fix that first (see above).
 **If the PDS responds and the handle resolves but the password is rejected:** set a new password.
 
 ```bash
-pnpm pds secret password
+npm run pds secret password
 ```
 
 This pushes a new `PASSWORD_HASH` to Cloudflare. Sign in with the new password.
@@ -104,7 +104,7 @@ For the wire format, see [The firehose](/concepts/firehose/).
 curl https://plc.directory/<did>
 ```
 
-The returned document should list the Cirrus hostname and the current public key. If it does not, the PLC operation did not land — re-run `pnpm pds identity`.
+The returned document should list the Cirrus hostname and the current public key. If it does not, the PLC operation did not land — re-run `npm run pds identity`.
 
 **For `did:web`:**
 
@@ -112,7 +112,7 @@ The returned document should list the Cirrus hostname and the current public key
 curl https://<domain>/.well-known/did.json
 ```
 
-Cirrus serves this from the Worker. If the public key is wrong, update `SIGNING_KEY_PUBLIC` (a `var` in `wrangler.jsonc`) so it matches the active `SIGNING_KEY`. If the hostname or handle is wrong, fix the corresponding `vars` entry. Redeploy with `pnpm run deploy`.
+Cirrus serves this from the Worker. If the public key is wrong, update `SIGNING_KEY_PUBLIC` (a `var` in `wrangler.jsonc`) so it matches the active `SIGNING_KEY`. If the hostname or handle is wrong, fix the corresponding `vars` entry. Redeploy with `npm run deploy`.
 
 ## Migration fails partway through
 
@@ -120,7 +120,7 @@ Cirrus serves this from the Worker. If the public key is wrong, update `SIGNING_
 
 **Recipe:**
 
-- Re-run `pnpm pds migrate`. The CLI resumes from the last checkpoint.
+- Re-run `npm run pds migrate`. The CLI resumes from the last checkpoint.
 - If the checkpoint is corrupt, run with `--clean` to start over. The target PDS is in a half-imported state until the migration completes.
 
 The source account is not affected until the PLC rotation lands.
@@ -131,7 +131,7 @@ The source account is not affected until the PLC rotation lands.
 
 **Common causes:**
 
-- Not authenticated. Run `pnpm wrangler login`.
+- Not authenticated. Run `npx wrangler login`.
 - The R2 bucket name is taken (R2 bucket names are global). Edit `wrangler.jsonc` to use a different name.
 - The Durable Object migration is missing. The first deploy creates the Durable Object class; subsequent renames or removals need a `migrations` block in `wrangler.jsonc`. See [the wrangler.jsonc reference](/reference/wrangler-config/).
 

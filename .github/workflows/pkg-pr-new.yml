@@ -13,20 +13,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v3
-
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
           node-version: latest
-          cache: "pnpm"
+          cache: "npm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
       - name: Build
-        run: pnpm build
+        run: npm run build
 
       - name: Publish to pkg.pr.new
-        run: pnpx pkg-pr-new publish --compact './packages/pds' './packages/oauth-provider' './packages/create-pds'
+        run: npx pkg-pr-new publish --compact '.'

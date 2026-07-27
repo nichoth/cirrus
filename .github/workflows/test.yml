@@ -9,22 +9,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 10.26.2
       - name: Setup Node
         uses: actions/setup-node@v6
         with:
-          cache: "pnpm"
+          cache: "npm"
           check-latest: true
           registry-url: "https://registry.npmjs.org"
       - name: Install dependencies
-        run: |
-          corepack enable
-          pnpm install
+        run: npm ci
       - name: Build
-        run: pnpm build
+        run: npm run build
       - name: Test
-        run: pnpm test
+        run: npm test
       - name: Knip
-        run: pnpm knip
+        run: npm run knip

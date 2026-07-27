@@ -7,7 +7,7 @@ Cirrus is open source. Contributions are welcome.
 
 ## Repository layout
 
-The repository is a pnpm workspace:
+The repository is a single npm package:
 
 ```
 cirrus/
@@ -30,17 +30,17 @@ Clone and install:
 ```bash
 git clone https://github.com/ascorbic/cirrus.git
 cd cirrus
-pnpm install
+npm install
 ```
 
-The workspace install pulls dependencies for every package. Node 20 or later is required.
+A single install pulls every dependency. Node 20 or later is required.
 
 ## Build
 
 From the repository root:
 
 ```bash
-pnpm build
+npm run build
 ```
 
 This builds every package in dependency order.
@@ -48,16 +48,16 @@ This builds every package in dependency order.
 For watch mode on a single package:
 
 ```bash
-cd packages/pds
-pnpm dev
+cd .
+npm run dev
 ```
 
 ## Test
 
-Run every test in the workspace:
+Run every test:
 
 ```bash
-pnpm test
+npm test
 ```
 
 The PDS package uses `vitest 4` with `@cloudflare/vitest-pool-workers`. Tests run inside a real Cloudflare Workers runtime via `workerd`, including SQLite-backed Durable Objects. No mocks.
@@ -65,28 +65,28 @@ The PDS package uses `vitest 4` with `@cloudflare/vitest-pool-workers`. Tests ru
 Run only the PDS unit tests:
 
 ```bash
-cd packages/pds
-pnpm test
+cd .
+npm test
 ```
 
 Run the CLI tests (which exercise `pds init` and friends):
 
 ```bash
-cd packages/pds
-pnpm test:cli
+cd .
+npm run test:cli
 ```
 
 Run end-to-end tests (which spin up a real Cirrus PDS against a real Cloudflare account; gated):
 
 ```bash
-cd packages/pds
-pnpm test:e2e
+cd .
+npm run test:e2e
 ```
 
 ## Type-check and lint
 
 ```bash
-pnpm check
+npm run check
 ```
 
 This runs the type-checker and lint on every package.
@@ -94,7 +94,7 @@ This runs the type-checker and lint on every package.
 ## Format
 
 ```bash
-pnpm format
+npm run format
 ```
 
 Prettier with tab indentation. Configured in `.prettierrc`.
@@ -117,7 +117,7 @@ To run the docs locally:
 
 ```bash
 cd docs
-pnpm dev
+npm run dev
 ```
 
 Edit Markdown files under `docs/src/content/docs/`. The site reloads automatically.
@@ -132,8 +132,8 @@ The writing style follows the [Astro docs style guide](https://contribute.docs.a
 2. Fork the repository.
 3. Create a branch.
 4. Make the change. Include tests where applicable.
-5. Run `pnpm check` and `pnpm test`.
-6. Add a changeset describing the change (`pnpm changeset`). Changesets describe the user-visible behaviour change, not the implementation.
+5. Run `npm run check` and `npm test`.
+6. Add a changeset describing the change (`npx changeset`). Changesets describe the user-visible behaviour change, not the implementation.
 7. Open a pull request.
 
 The plan documents in `plans/` are useful context for understanding the current direction.

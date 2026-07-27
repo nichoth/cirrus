@@ -11,7 +11,7 @@ Each item is a yes/no check. Most of them only need to be done once.
 
 - [ ] **Domain is active in Cloudflare.** The PDS hostname's domain must show **Active** in the Cloudflare dashboard. DNS propagation can take a few minutes.
 - [ ] **R2 is enabled on the Cloudflare account.** Required for blob storage. Enable from the R2 section of the dashboard.
-- [ ] **`wrangler` is authenticated.** Run `pnpm wrangler whoami` to confirm. If not, run `pnpm wrangler login`.
+- [ ] **`wrangler` is authenticated.** Run `npx wrangler whoami` to confirm. If not, run `npx wrangler login`.
 - [ ] **Signing key is backed up.** See [Back up your signing key](/guides/back-up-signing-key/). After this step, the key cannot be retrieved from Cloudflare.
 - [ ] **`DATA_LOCATION` is set deliberately.** This is hard to change later. See [Data placement](/concepts/data-placement/).
 - [ ] **`PDS_HOSTNAME` matches the public DNS record.** The hostname in `wrangler.jsonc` must be reachable at that DNS name. Cloudflare Workers handles the routing via a custom domain or a worker route.
@@ -21,7 +21,7 @@ Each item is a yes/no check. Most of them only need to be done once.
 Push the secrets stored in `.dev.vars` to Cloudflare as Worker secrets:
 
 ```bash
-pnpm pds init --production
+npm run pds init -- --production
 ```
 
 This writes `AUTH_TOKEN`, `SIGNING_KEY`, `JWT_SECRET`, and `PASSWORD_HASH` as encrypted secrets on the Worker. These cannot be read back.
@@ -29,7 +29,7 @@ This writes `AUTH_TOKEN`, `SIGNING_KEY`, `JWT_SECRET`, and `PASSWORD_HASH` as en
 Deploy:
 
 ```bash
-pnpm run deploy
+npm run deploy
 ```
 
 `wrangler deploy` uploads the Worker, creates the `ACCOUNT` Durable Object namespace, and creates the R2 bucket on first run.

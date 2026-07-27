@@ -31,7 +31,7 @@ The domain must show as **Active** in the Cloudflare dashboard before the deploy
 
 ## Node.js and a package manager
 
-Cirrus is distributed as npm packages. The scaffolder runs under Node 20 or later. Any of `pnpm`, `npm`, `yarn`, or `bun` work; the scaffolder asks which to use.
+Cirrus is distributed as npm packages. The scaffolder runs under Node 20 or later. Any of `npm`, `yarn`, or `bun` work; the scaffolder asks which to use.
 
 ## Bluesky account credentials, if migrating
 

@@ -51,7 +51,7 @@ Cloudflare location hint for the Durable Object. Values: `auto`, `eu`, `wnam`, `
 
 ## Secrets
 
-These are Worker secrets in production and live in `.dev.vars` for local development. Set with `pnpm wrangler secret put <name>` or push from `.dev.vars` with `pnpm pds init --production`.
+These are Worker secrets in production and live in `.dev.vars` for local development. Set with `npx wrangler secret put <name>` or push from `.dev.vars` with `npm run pds init -- --production`.
 
 ### `SIGNING_KEY` (required)
 
@@ -116,7 +116,7 @@ The validation is intentionally fail-fast: a half-configured PDS would emit brok
 For public vars:
 
 ```bash
-pnpm wrangler deployments view
+npx wrangler deployments view
 ```
 
 Or check `wrangler.jsonc` directly.
@@ -124,7 +124,7 @@ Or check `wrangler.jsonc` directly.
 For secrets, the list is visible but the values are not:
 
 ```bash
-pnpm wrangler secret list
+npx wrangler secret list
 ```
 
 To replace a secret without seeing the previous value, `wrangler secret put` over the top.

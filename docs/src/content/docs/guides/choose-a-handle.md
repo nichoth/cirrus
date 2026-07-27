@@ -38,7 +38,7 @@ The DID in the TXT record must match the account DID exactly.
 The fastest check:
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 The output shows the configured handle and whether it resolves. A green check on **Handle resolves** confirms success.

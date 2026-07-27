@@ -4,10 +4,9 @@ This file provides guidance to agentic coding tools when working with code in th
 
 **ALWAYS verify your current working directory before operating on files:**
 
-- Repository root is `cirrus` not `packages/pds/`
+- The repository is a single package rooted at `cirrus`
 - Use `pwd` or check `process.cwd()` to confirm location
-- Many project files (CLAUDE.md, plans/) are at repository root
-- Package-specific files are in `packages/pds/`
+- All package files (src/, test/, configs, CLAUDE.md, plans/) are at the root
 
 **ALWAYS read and update implementation plans:**
 
@@ -25,33 +24,39 @@ This file provides guidance to agentic coding tools when working with code in th
 
 ## Repository Structure
 
-This is a monorepo using pnpm workspaces with the following structure:
+This is a single npm package (`@getcirrus/pds`), not a monorepo:
 
-- **Root** (`cirrus`): Workspace configuration, shared tooling, plan documents
-- **packages/pds**: The main PDS library (`@getcirrus/pds`)
-- **packages/oauth-provider**: OAuth 2.1 Provider (`@getcirrus/oauth-provider`)
-- **packages/create-pds**: CLI scaffolding tool (`create-pds`)
-- **demos/pds**: Demo PDS deployment
+- **src/**: The PDS library, plus the `pds` CLI under `src/cli/`
+- **src/oauth-provider/**: OAuth 2.1 provider, an internal module
+- **src/create-pds.ts**: CLI scaffolding tool, published as the `create-pds` bin
+- **templates/**: Project templates used by the scaffolder
+- **test/**, **e2e/**: Test suites
+
+Three directories are standalone projects, deliberately outside the package
+because their dependencies conflict with it. Each needs its own install:
+
+- **apps/check**: Web-based PDS verifier (Solid; requires `@atcute` v2 majors)
+- **docs**: Astro documentation site
+- **demos/pds**: Demo deployment, consumes the root package via `file:../..`
 
 ## Commands
 
-### Root-level commands (run from repository root):
+All commands run from the repository root:
 
-- `pnpm build` - Build all packages
-- `pnpm test` - Run tests for all packages
-- `pnpm check` - Run type checking and linting for all packages
-- `pnpm format` - Format code using Prettier
-
-### Package-level commands (run within individual packages):
-
-- `pnpm build` - Build the package using tsdown (ESM + DTS output)
-- `pnpm dev` - Watch mode for development
-- `pnpm test` - Run vitest tests
-- `pnpm check` - Run publint and @arethetypeswrong/cli checks
+- `npm run build` - Build with tsdown (ESM + DTS), emitting `dist/index.js`,
+  `dist/cli.js` and `dist/create-pds.js`
+- `npm run dev` - Watch mode for development
+- `npm test` - Run all three suites (`test:unit`, `test:cli`, `test:node`)
+- `npm run test:unit` - Workers-pool suite (vitest.config.ts)
+- `npm run test:cli` - CLI suite in node (vitest.config.cli.ts)
+- `npm run test:node` - oauth-provider and create-pds suites (vitest.config.node.ts)
+- `npm run check` - Run publint and @arethetypeswrong/cli checks
+- `npm run knip` - Unused code and dependency check
+- `npm run format` - Format code using Prettier
 
 ## Development Workflow
 
-- Uses **pnpm** as package manager
+- Uses **npm** as package manager
 - **tsdown** for building TypeScript packages with ESM output and declaration files
 - **vitest** for testing
 - **publint** and **@arethetypeswrong/cli** for package validation
@@ -59,12 +64,18 @@ This is a monorepo using pnpm workspaces with the following structure:
 
 ## Package Architecture
 
-Each package in `packages/` follows this structure:
+The package has three build entry points:
 
-- `src/index.ts` - Main entry point
-- `test/` - Test files
+- `src/index.ts` - Library entry, exported as `@getcirrus/pds`
+- `src/cli/index.ts` - The `pds` bin
+- `src/create-pds.ts` - The `create-pds` bin
+- `test/`, `e2e/` - Test files
 - `dist/` - Built output (ESM + .d.ts files)
-- Package exports configured for ESM-only with proper TypeScript declarations
+- Exports configured for ESM-only with proper TypeScript declarations
+
+`src/oauth-provider/` is an internal module. It was formerly the separate
+`@getcirrus/oauth-provider` package, so import it by relative path
+(`./oauth-provider`), never by package name.
 
 ## TypeScript Configuration
 

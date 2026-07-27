@@ -13,13 +13,13 @@ The `pds migrate` command provides a delightful, whimsical UX for migrating your
 
 ```bash
 # Start the dev server in one terminal
-pnpm dev
+npm run dev
 
 # Run migration in another terminal
-pnpm pds migrate
+npm run pds migrate
 
 # To reset and start fresh (only works on deactivated accounts)
-pnpm pds migrate --clean
+npm run pds migrate -- --clean
 ```
 
 ### What it does:
@@ -112,7 +112,7 @@ wrangler secret put JWT_SECRET
 wrangler secret put SIGNING_KEY
 
 # Deploy
-pnpm deploy
+npm run deploy
 ```
 
 PDS is now live but deactivated.
@@ -261,14 +261,14 @@ When account is deactivated, these operations should fail with error:
 
 ### Implemented Commands
 
-| Command                    | Description                                       |
-| -------------------------- | ------------------------------------------------- |
-| `pnpm pds init`            | Interactive setup wizard (handles migration mode) |
-| `pnpm pds migrate`         | Transfer data from source PDS                     |
-| `pnpm pds migrate --clean` | Reset migration and start fresh                   |
-| `pnpm pds secret password` | Set account password                              |
-| `pnpm pds secret jwt`      | Generate JWT secret                               |
-| `pnpm pds secret key`      | Manage signing keys                               |
+| Command                          | Description                                       |
+| -------------------------------- | ------------------------------------------------- |
+| `npm run pds init`               | Interactive setup wizard (handles migration mode) |
+| `npm run pds migrate`            | Transfer data from source PDS                     |
+| `npm run pds migrate -- --clean` | Reset migration and start fresh                   |
+| `npm run pds secret password`    | Set account password                              |
+| `npm run pds secret jwt`         | Generate JWT secret                               |
+| `npm run pds secret key`         | Manage signing keys                               |
 
 ### Setup Flow
 
@@ -278,13 +278,13 @@ npx create-pds my-pds
 cd my-pds
 
 # Interactive setup (choose "migrating existing account")
-pnpm pds init
+npm run pds init
 
 # Start dev server
-pnpm dev
+npm run dev
 
 # Run migration (in another terminal)
-pnpm pds migrate
+npm run pds migrate
 ```
 
 ## Advantages Over Complex Wizard

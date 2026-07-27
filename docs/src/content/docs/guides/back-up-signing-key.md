@@ -32,9 +32,9 @@ The backup needs to be:
 When restoring to a new machine — for example, after cloning the project repository — `pds init` detects that the deploy already exists and prompts for the key.
 
 1. Clone the project repository.
-2. Run `pnpm install`.
+2. Run `npm install`.
 3. Create `.dev.vars` (or edit the existing one) and add the line `SIGNING_KEY=<the backed-up key>`.
-4. Run `pnpm pds init`.
+4. Run `npm run pds init`.
 
 The wizard reads the existing key from `.dev.vars`, verifies that it matches the public key in the DID document, and continues the configuration.
 
@@ -45,7 +45,7 @@ If `.dev.vars` does not exist and no key is found, the wizard reports **Key Reco
 A backup that has not been tested is not a backup. Verify it by setting up the project from scratch on a different machine, restoring the key, and running:
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 A successful run confirms the key matches the public key in the DID document.

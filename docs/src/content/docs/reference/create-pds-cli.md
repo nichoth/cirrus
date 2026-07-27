@@ -11,10 +11,10 @@ description: Flags and behaviour of the create-pds scaffolder.
 npm create pds@latest [project-directory] [flags]
 ```
 
-Or with pnpm / yarn / bun:
+Or with yarn / bun:
 
 ```bash
-pnpm create pds@latest
+npm create pds@latest
 yarn create pds
 bun create pds
 ```
@@ -42,7 +42,7 @@ The generated project includes:
 
 | Flag | Effect |
 |---|---|
-| `--package-manager <pm>`, `--pm <pm>` | Choose `pnpm`, `npm`, `yarn`, or `bun` without prompting. |
+| `--package-manager <pm>`, `--pm <pm>` | Choose `npm`, `yarn`, or `bun` without prompting. |
 | `--skip-install` | Skip the dependency install step. |
 | `--skip-git` | Skip `git init`. |
 | `--skip-init` | Skip running `pds init` at the end. The project is scaffolded but not configured. |
@@ -51,7 +51,7 @@ The generated project includes:
 Example for a fully unattended scaffold:
 
 ```bash
-npm create pds@latest my-pds -- --yes --pm pnpm --skip-init
+npm create pds@latest my-pds -- --yes --pm npm --skip-init
 ```
 
 `--skip-init` is useful in scripted setups that handle the wizard separately.

@@ -24,7 +24,7 @@ Once signed in, the Bluesky app will use your Cirrus PDS for all API calls. This
 To avoid putting the main account password into the app, create an app password and sign in with that:
 
 ```bash
-pnpm pds app-password create
+npm run pds app-password create
 ```
 
 The CLI prints the password once (format `xxxx-xxxx-xxxx-xxxx`). Use it on the sign-in screen in place of the account password. See [Create an app password](/guides/app-password/) for the full flow.

@@ -10,7 +10,7 @@ After the [Quick start](/start/quick-start/), the PDS is live but unused. This p
 Handle resolution is the step that connects a human-readable name to a DID. Test it directly:
 
 ```bash
-pnpm pds status
+npm run pds status
 ```
 
 The status command prints the handle, the DID, the resolved DID document, the repository revision, and the blob count. A green check next to **Handle resolves** confirms that the network can find the account from the handle.
@@ -42,7 +42,7 @@ Once signed in, the app fetches the repository, refreshes the feed, and the acco
 Passkeys in Cirrus are for the OAuth authorization flow. They are a secure way to login to other Atmosphere apps such as Leaflet or Tangled, without sharing your account password. They do **not** replace the password for the Bluesky app:
 
 ```bash
-pnpm pds passkey add
+npm run pds passkey add
 ```
 
 The command prints a URL (and QR code) that opens a registration page valid for ten minutes. Follow [Set up passkey login](/guides/passkey-login/) for the full flow.
