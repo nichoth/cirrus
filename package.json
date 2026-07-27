@@ -1,5 +1,5 @@
 {
-	"name": "@getcirrus/pds",
+	"name": "@nichoth/pds",
 	"version": "0.18.0",
 	"description": "Cirrus - A single-user AT Protocol PDS on Cloudflare Workers",
 	"type": "module",
@@ -81,9 +81,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/ascorbic/cirrus.git"
+		"url": "git+https://github.com/nichoth/cirrus.git"
 	},
-	"homepage": "https://github.com/ascorbic/cirrus",
+	"homepage": "https://github.com/nichoth/cirrus",
 	"keywords": [
 		"atproto",
 		"bluesky",
